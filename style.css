@@ -1,0 +1,47 @@
+body {
+    text-align: center;
+    background: rgb(39, 38, 38);
+    color: white;
+
+}
+
+::placeholder {
+    color: #fff !important;
+}
+
+.container {
+    background-color: #3661d6;
+    max-width: 400px;
+    border: 1px solid white;
+    margin-top: 200px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+input[type=text],
+input[type=text]:focus {
+    color: #fff;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.todos li {
+    background-color: #3661d6;
+}
+
+.delete {
+    cursor: pointer;
+}
+
+.filtered {
+    display: none !important;
+}
+
+button {
+    border: none;
+    background-color: #688ef5;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
