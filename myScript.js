@@ -13,7 +13,7 @@ let data = JSON.parse(localStorage.getItem('items'));
 const generateTemplate = todo => {
     const li = document.createElement('li');
     li.setAttribute("class", "list-group-item text-light d-flex justify-content-between align-items-center");
-    li.innerHTML = `<span>${todo}</span>`;
+    li.innerHTML = `<span>${todo}<span>`;
     li.innerHTML += `<button class="hide">Update</button>`;
     ul.appendChild(li);
     const newIcon = document.createElement('i');
@@ -51,7 +51,7 @@ ul.addEventListener('click', e => {
         //console.log(e.target.parentElement.firstChild.textContent);
         //console.log(data)
         for (let i = 0; i < data.length; i++)
-            if (data[i] === e.target.parentElement.firstChild.value) {
+            if (data[i] === e.target.parentElement.firstChild.textContent) {
                 console.log(data[i])
                 data.splice(i, 1);
                 update();
@@ -59,13 +59,7 @@ ul.addEventListener('click', e => {
     }
 })
 
-ul.addEventListener('click', e => {
-    for (let i = 0; i < data.length; i++) {
-        if (data[i] === e.target.value) {
-            e.target.removeAttribute('readonly');
-        }
-    }
-})
+
 /*
 inputs.forEach((input) => {
     input.addEventListener('change', e => {
