@@ -2,7 +2,7 @@ const add = document.querySelector('.add');
 const ul = document.querySelector('.todos');
 const search = document.querySelector('.search input');
 const button = document.querySelector('button');
-const inputs = document.querySelectorAll('.list-input');
+//const inputs = document.querySelectorAll('.list-input');
 
 let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 localStorage.setItem('items', JSON.stringify(itemsArray));
@@ -13,7 +13,7 @@ let data = JSON.parse(localStorage.getItem('items'));
 const generateTemplate = todo => {
     const li = document.createElement('li');
     li.setAttribute("class", "list-group-item text-light d-flex justify-content-between align-items-center");
-    li.innerHTML = `<input class="list-input" type="text" readonly value= "${todo}"/>`;
+    li.innerHTML = `<span>${todo}</span>`;
     li.innerHTML += `<button class="hide">Update</button>`;
     ul.appendChild(li);
     const newIcon = document.createElement('i');
@@ -66,7 +66,7 @@ ul.addEventListener('click', e => {
         }
     }
 })
-
+/*
 inputs.forEach((input) => {
     input.addEventListener('change', e => {
         console.log('olacak')
@@ -80,7 +80,7 @@ inputs.forEach((input) => {
         }
     })
 });
-
+*/
 
 button.addEventListener('click', function () {
     localStorage.clear();
@@ -101,4 +101,5 @@ const filterFunc = filtre => {
 search.addEventListener('keyup', () => {
     const filtre = search.value.trim().toLowerCase();
     filterFunc(filtre);
+    console.log(filtre)
 })
