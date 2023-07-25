@@ -6,7 +6,7 @@ body {
 }
 
 ::placeholder {
-    color: #fff !important;
+    color: #cad7f8 !important;
 }
 
 .container {
@@ -52,4 +52,13 @@ button {
 
 .visible {
     display: block;
+}
+
+.cancel {
+    border: none;
+    background-color: #aabef5;
+    color: red;
+    padding: 3px 6px;
+    border-radius: 10px;
+    font-size: 12px;
 }

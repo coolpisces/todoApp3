@@ -38,20 +38,32 @@ ul.addEventListener('dblclick', e => {
     console.log(e.target.textContent)
     console.log(e.target.lastChild.value)
     e.target.lastChild.classList.remove('hide');
+
     e.target.lastChild.classList.add('visible');
-    e.target.lastChild.setAttribute('placeholder', 'Please enter new value...');
+    e.target.lastChild.setAttribute('value', `${e.target.textContent}`);
     e.target.lastChild.style.backgroundColor = "white";
     e.target.lastChild.style.color = "red";
-    e.target.lastChild.addEventListener('change', event => {
-        for (let i = 0; i < data.length; i++)
-            if (data[i] === e.target.textContent && !e.target.lastChild.value) {
+    e.target.lastChild.addEventListener('change', () => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i] === e.target.textContent) {
                 data[i] = e.target.lastChild.value;
                 e.target.lastChild.classList.remove('visible');
                 e.target.lastChild.classList.add('hide');
                 e.target.textContent = e.target.lastChild.value;
                 break;
             }
+        }
+
         update();
+    })
+    e.target.lastChild.addEventListener('blur', () => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i] === e.target.lastChild.value) {
+                e.target.lastChild.classList.remove('visible');
+                e.target.lastChild.classList.add('hide');
+                break;
+            }
+        }
     })
 })
 
