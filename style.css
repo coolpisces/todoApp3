@@ -40,8 +40,8 @@ input[type=text]:focus {
 
 button {
     border: none;
-    background-color: #688ef5;
-    color: white;
+    background-color: #aabef5;
+    color: red;
     padding: 10px 20px;
     border-radius: 10px;
 }
