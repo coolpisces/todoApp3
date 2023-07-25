@@ -44,7 +44,7 @@ ul.addEventListener('dblclick', e => {
     e.target.lastChild.style.color = "red";
     e.target.lastChild.addEventListener('change', event => {
         for (let i = 0; i < data.length; i++)
-            if (data[i] === e.target.textContent) {
+            if (data[i] === e.target.textContent && !e.target.lastChild.value) {
                 data[i] = e.target.lastChild.value;
                 e.target.lastChild.classList.remove('visible');
                 e.target.lastChild.classList.add('hide');
