@@ -11,6 +11,7 @@ const signInContainer = document.getElementById('signInContainer');
 const clearAll = document.getElementById('clearAll');
 const signInButton = document.getElementById('signInButton');
 const logout = document.getElementById('logout');
+const loginAccount = document.getElementById('loginAccount');
 
 let itemsArray;
 let data;
@@ -53,7 +54,7 @@ loginButton.addEventListener('click', e => {
             loginContainer.classList.add('hide');
             contentContainer.classList.remove('hide');
 
-
+            loginAccount.innerHTML += `Giriş yapılan hesap: ${inputEmail.value}`;
             data.forEach(item => {
                 generateTemplate(item);
             });
@@ -172,6 +173,7 @@ logout.addEventListener('click', e => {
     inputEmail.value = "";
     inputPassword.value = "";
     data = "";
+    loginAccount.innerHTML = "";
     location.reload();
 });
 
