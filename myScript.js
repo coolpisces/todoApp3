@@ -2,14 +2,67 @@ const add = document.querySelector('.add');
 const ul = document.querySelector('.todos');
 const search = document.querySelector('.search input');
 const button = document.querySelector('button');
+const loginButton = document.getElementById('loginButton');
+const inputEmail = document.getElementById('inputEmail');
+const inputPassword = document.getElementById('inputPassword');
+const loginContainer = document.getElementById('loginContainer');
+const contentContainer = document.getElementById('contentContainer');
+const signInContainer = document.getElementById('signInContainer');
+const clearAll = document.getElementById('clearAll');
+const signInButton = document.getElementById('signInButton');
+const logout = document.getElementById('logout');
 
-//const inputs = document.querySelectorAll('.list-input');
+let itemsArray;
+let data;
+let email;
 
-let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
-localStorage.setItem('items', JSON.stringify(itemsArray));
-let data = JSON.parse(localStorage.getItem('items'));
+signInButton.addEventListener('click', e => {
+    e.preventDefault();
+    if (inputPassword.value === "") {
+        alert("Password field can't be null!")
+    } else {
+        itemsArray = [];
+        localStorage.setItem(inputEmail.value, JSON.stringify(itemsArray));
+        localStorage.setItem(`${inputEmail.value}-Password`, inputPassword.value);
+        data = JSON.parse(localStorage.getItem(inputEmail.value));
+        alert("Your registration has been created!");
+        data.forEach(item => {
+            generateTemplate(item);
+        });
+    }
+});
 
 
+
+loginButton.addEventListener('click', e => {
+    e.preventDefault();
+    if (inputPassword.value === "") {
+        alert("Password field can't be null!")
+    } else {
+        if (localStorage.getItem(inputEmail.value) && localStorage.getItem(`${inputEmail.value}-Password`) === inputPassword.value) {
+            itemsArray = JSON.parse(localStorage.getItem(inputEmail.value))
+        }
+
+        if (itemsArray && inputEmail.value.length > 0) {
+
+            localStorage.setItem(inputEmail.value, JSON.stringify(itemsArray));
+            data = JSON.parse(localStorage.getItem(inputEmail.value));
+            console.log(data)
+
+            //localStorage.setItem(`${user}`, JSON.stringify(data));
+            loginContainer.classList.add('hide');
+            contentContainer.classList.remove('hide');
+
+
+            data.forEach(item => {
+                generateTemplate(item);
+            });
+        } else {
+            alert(`Username or password is not found! Please check your username or password! If you do not have a membership, you must be register! Please type your email and password then press SignIn button first!`);
+            return;
+        }
+    }
+})
 
 const generateTemplate = todo => {
     const li = document.createElement('li');
@@ -22,17 +75,6 @@ const generateTemplate = todo => {
     newIcon.setAttribute('class', 'far bi-trash3 delete');
     li.appendChild(newIcon);
 }
-/*
-let key = "";
-function updateSpan(key) {
-    for (let i = 0; i < data.length; i++)
-        if (data[i] === key) {
-            
-            break;
-        }
-    key = this.key;
-}
-*/
 
 ul.addEventListener('dblclick', e => {
     console.log(e.target.textContent)
@@ -67,17 +109,20 @@ ul.addEventListener('dblclick', e => {
     })
 })
 
-data.forEach(item => {
-    generateTemplate(item);
-});
-
 add.addEventListener('submit', e => {
     e.preventDefault();
     const todo = e.target.add.value.trim();
+    for (let i = 0; i < itemsArray.length; i++) {
+        if (data[i] === todo) {
+            alert('This task is already saved!')
+            return;
+        }
+    }
     if (todo.length != 0) {
+
         itemsArray.push(todo);
-        localStorage.setItem('items', JSON.stringify(itemsArray));
-        data = JSON.parse(localStorage.getItem('items'));
+        localStorage.setItem(inputEmail.value, JSON.stringify(itemsArray));
+        data = JSON.parse(localStorage.getItem(inputEmail.value));
         generateTemplate(todo);
         add.reset();
     }
@@ -85,10 +130,10 @@ add.addEventListener('submit', e => {
 });
 
 function update() {
-    localStorage.setItem('items', JSON.stringify(data));
-    itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
-    localStorage.setItem('items', JSON.stringify(itemsArray));
-    data = JSON.parse(localStorage.getItem('items'));
+    localStorage.setItem(inputEmail.value, JSON.stringify(data));
+    itemsArray = localStorage.getItem(inputEmail.value) ? JSON.parse(localStorage.getItem(inputEmail.value)) : [];
+    localStorage.setItem(inputEmail.value, JSON.stringify(itemsArray));
+    data = JSON.parse(localStorage.getItem(inputEmail.value));
 }
 
 ul.addEventListener('click', e => {
@@ -104,12 +149,30 @@ ul.addEventListener('click', e => {
     }
 })
 
-button.addEventListener('click', function () {
-    localStorage.clear();
+clearAll.addEventListener('click', function () {
+    //localStorage.clear();
+    localStorage.removeItem(inputEmail.value);
+    localStorage.removeItem(inputEmail.value + "-Password");
     while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
     }
-    itemsArray = [];
+    itemsArray = "";
+    loginContainer.classList.remove('hide');
+    contentContainer.classList.add('hide');
+    inputEmail.value = "";
+    inputPassword.value = "";
+    data = "";
+    location.reload();
+});
+
+logout.addEventListener('click', e => {
+    itemsArray = "";
+    loginContainer.classList.remove('hide');
+    contentContainer.classList.add('hide');
+    inputEmail.value = "";
+    inputPassword.value = "";
+    data = "";
+    location.reload();
 });
 
 const filterFunc = filtre => {

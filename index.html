@@ -12,9 +12,32 @@
 </head>
 
 <body>
-    <div class="container">
+
+    <div id="loginContainer" class="container">
+        <h1 class="mb-4">Todo App Login</h1>
+        <form>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword">
+                </div>
+            </div>
+            <button id="loginButton" type="submit" class="btn btn-primary">Login</button>
+            <button id="signInButton" type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+    </div>
+
+
+
+    <div id="contentContainer" class="container hide">
         <header class="text-center text-light my-4">
-            <h1 class="mb-4">Todo App</h1>
+            <h1 class="mb-4">Todo App Main Page</h1>
             <form class="search">
                 <input type="text" name="search" class="form-control" placeholder="Search...">
             </form>
@@ -31,7 +54,8 @@
             <label class="text-light">Enter to Add a New Job</label>
             <input type="text" id="add" name="add" class="form-control m-auto">
         </form>
-        <button>Clear All</button>
+        <button id="clearAll">Clear All</button>
+        <button id="logout">Logout</button>
     </div>
 
 
