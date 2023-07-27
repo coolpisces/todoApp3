@@ -44,7 +44,7 @@ loginButton.addEventListener('click', e => {
             itemsArray = JSON.parse(localStorage.getItem(inputEmail.value))
         }
 
-        if (itemsArray && inputEmail.value.length > 0) {
+        if (itemsArray && inputEmail.value.length > 0 && localStorage.getItem(`${inputEmail.value}-Password`) === inputPassword.value) {
 
             localStorage.setItem(inputEmail.value, JSON.stringify(itemsArray));
             data = JSON.parse(localStorage.getItem(inputEmail.value));
